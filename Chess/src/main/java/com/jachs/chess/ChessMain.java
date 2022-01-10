@@ -1,5 +1,7 @@
 package com.jachs.chess;
 
+import com.jachs.chess.frame.MainJFrame;
+
 /***
  * @author zhanchaohan
  *

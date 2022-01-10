@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 
 /***
- * 定义中国象棋规则的类
+ * 定义中国象棋规则类
  * @author zhanchaohan
  *
  */
@@ -13,19 +13,18 @@ public class ChessRule {
 	/**卒子的移动规则*/
 	public void armsRule(int Man,JLabel play,MouseEvent me){
 		//黑卒向下
-		if (MainJFrame.Man < 21){
+		if (Man < 21){
 			//向下移动、得到终点的坐标模糊成合法的坐标
 			if ((me.getY()-play.getY()) > 27 && (me.getY()-play.getY()) < 86 && (me.getX()-play.getX()) < 55 && (me.getX()-play.getX()) > 0){
 				
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(Man));
 				
 				play.setBounds(play.getX(),play.getY()+57,55,55);
 			}
-			
 			//向右移动、得到终点的坐标模糊成合法的坐标、必须过河				
 			else if (play.getY() > 284 && (me.getX() - play.getX()) >= 57 && (me.getX() - play.getX()) <= 112){
 				play.setBounds(play.getX()+57,play.getY(),55,55);	
@@ -41,10 +40,10 @@ public class ChessRule {
 		//红卒向上
 		else{
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//向上移动、得到终点的坐标模糊成合法的坐标
 			if ((me.getX()-play.getX()) >= 0 && (me.getX()-play.getX()) <= 55 && (play.getY()-me.getY()) >27 && play.getY()-me.getY() < 86){
@@ -69,12 +68,10 @@ public class ChessRule {
 		if ((play2.getX() - play1.getX()) <= 112 && (play2.getX() - play1.getX()) >= 57 && (play1.getY() - play2.getY()) < 22 && (play1.getY() - play2.getY()) > -22 && play2.isVisible() && play1.getName().charAt(1)!=play2.getName().charAt(1)){
 			//黑棋要过河才能右吃棋
 			if (play1.getName().charAt(1) == '1' && play1.getY() > 284 && play1.getName().charAt(1) != play2.getName().charAt(1)){
-
 				play2.setVisible(false);
 				//把对方的位置给自己
 				play1.setBounds(play2.getX(),play2.getY(),55,55);
 			}
-			
 			//红棋要过河才左能吃棋
 			else if (play1.getName().charAt(1) == '2' && play1.getY() < 341 && play1.getName().charAt(1) != play2.getName().charAt(1)){
 				play2.setVisible(false);
@@ -91,7 +88,6 @@ public class ChessRule {
 				//把对方的位置给自己
 				play1.setBounds(play2.getX(),play2.getY(),55,55);
 			}
-			
 			//红棋要过河才能右吃棋
 			else if (play1.getName().charAt(1) == '2' && play1.getY() < 341 && play1.getName().charAt(1) != play2.getName().charAt(1)){
 				play2.setVisible(false);
@@ -118,16 +114,16 @@ public class ChessRule {
 		}
 		
 		//当前记录添加到集合(用于悔棋)
-		MainJFrame.Var.add(String.valueOf(play1.isVisible()));
-		MainJFrame.Var.add(String.valueOf(play1.getX()));
-		MainJFrame.Var.add(String.valueOf(play1.getY()));
-		MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+		AppConstant.Var.add(String.valueOf(play1.isVisible()));
+		AppConstant.Var.add(String.valueOf(play1.getX()));
+		AppConstant.Var.add(String.valueOf(play1.getY()));
+		AppConstant.Var.add(String.valueOf(AppConstant.Man));
 		
 		//当前记录添加到集合(用于悔棋)
-		MainJFrame.Var.add(String.valueOf(play2.isVisible()));
-		MainJFrame.Var.add(String.valueOf(play2.getX()));
-		MainJFrame.Var.add(String.valueOf(play2.getY()));
-		MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+		AppConstant.Var.add(String.valueOf(play2.isVisible()));
+		AppConstant.Var.add(String.valueOf(play2.getX()));
+		AppConstant.Var.add(String.valueOf(play2.getY()));
+		AppConstant.Var.add(String.valueOf(AppConstant.i));
 
 	}//卒吃结束
 	
@@ -154,7 +150,7 @@ public class ChessRule {
 									Count++;
 									break;
 								}
-							}//for
+							}
 							
 							//从起点到终点(从右到左)
 							for (int k=i+57;k<play.getY();k+=57){
@@ -163,17 +159,17 @@ public class ChessRule {
 									Count++;
 									break;
 								}
-							}//for
-						}//if
-					}//for
+							}
+						}
+					}
 					
 					//起点和终点没有棋子就可以移动了
 					if (Count == 0){
 						//当前记录添加到集合(用于悔棋)
-						MainJFrame.Var.add(String.valueOf(play.isVisible()));
-						MainJFrame.Var.add(String.valueOf(play.getX()));
-						MainJFrame.Var.add(String.valueOf(play.getY()));
-						MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+						AppConstant.Var.add(String.valueOf(play.isVisible()));
+						AppConstant.Var.add(String.valueOf(play.getX()));
+						AppConstant.Var.add(String.valueOf(play.getY()));
+						AppConstant.Var.add(String.valueOf(AppConstant.Man));
 						play.setBounds(play.getX(),i,55,55);
 						break;
 					}
@@ -215,10 +211,10 @@ public class ChessRule {
 					//起点和终点没有棋子
 					if (Count == 0){
 						//当前记录添加到集合(用于悔棋)
-						MainJFrame.Var.add(String.valueOf(play.isVisible()));
-						MainJFrame.Var.add(String.valueOf(play.getX()));
-						MainJFrame.Var.add(String.valueOf(play.getY()));
-						MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+						AppConstant.Var.add(String.valueOf(play.isVisible()));
+						AppConstant.Var.add(String.valueOf(play.getX()));
+						AppConstant.Var.add(String.valueOf(play.getY()));
+						AppConstant.Var.add(String.valueOf(AppConstant.Man));
 						
 						play.setBounds(i,play.getY(),55,55);
 						break;
@@ -285,16 +281,16 @@ public class ChessRule {
 		//起点和终点之间要一个棋子是炮的规则、并不能吃自己的棋子
 		if (Count == 1 && Chess == 0 && playTake.getName().charAt(1) != play.getName().charAt(1)){
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));									
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));									
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));
 			
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
@@ -304,16 +300,16 @@ public class ChessRule {
 		else if (Count ==0  && Chess == 1 && playTake.getName().charAt(1) != play.getName().charAt(1)){
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));									
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));									
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));									
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));									
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));
 			
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
@@ -357,10 +353,10 @@ public class ChessRule {
 			//可以移动该棋子
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 								
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -393,10 +389,10 @@ public class ChessRule {
 			
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -428,10 +424,10 @@ public class ChessRule {
 			
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -470,10 +466,10 @@ public class ChessRule {
 			//可以移动该棋子
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));	
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));	
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -508,10 +504,10 @@ public class ChessRule {
 			//可以移动该棋子
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -543,10 +539,10 @@ public class ChessRule {
 			
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -578,10 +574,10 @@ public class ChessRule {
 			
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -613,10 +609,10 @@ public class ChessRule {
 			
 			if (Move == 0){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -747,16 +743,16 @@ public class ChessRule {
 		//没有障碍、并可以吃棋、不能吃自己颜色
 		if (Chess && Move == 0 && playTake.getName().charAt(1) != play.getName().charAt(1)){
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));			
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));			
 			
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
@@ -795,12 +791,12 @@ public class ChessRule {
 			}
 			
 			//红旗不能过楚河
-			if (Move == 0 && Ey >= 341 && MainJFrame.Man > 9){
+			if (Move == 0 && Ey >= 341 && AppConstant.Man > 9){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 							
 							System.out.println("Ex="+Ex);
 							System.out.println("Ey="+Ey);
@@ -808,12 +804,12 @@ public class ChessRule {
 			}
 			
 			//黑旗不能过汉界
-			else if (Move == 0 && Ey <= 284 && MainJFrame.Man < 10){
+			else if (Move == 0 && Ey <= 284 && AppConstant.Man < 10){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);	
 			}
@@ -846,22 +842,22 @@ public class ChessRule {
 			}
 			
 			//相、象规则
-			if (Move == 0 && Ey >= 341 && MainJFrame.Man > 9){
+			if (Move == 0 && Ey >= 341 && AppConstant.Man > 9){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
 			
-			else if (Move == 0 && Ey <= 284 && MainJFrame.Man < 10){
+			else if (Move == 0 && Ey <= 284 && AppConstant.Man < 10){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -896,23 +892,23 @@ public class ChessRule {
 			
 			//相、象规则
 			
-			if (Move == 0 && Ey >= 341 && MainJFrame.Man > 9){
+			if (Move == 0 && Ey >= 341 && AppConstant.Man > 9){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 								
 				play.setBounds(Ex,Ey,55,55);
 			}
 			
-			else if (Move == 0 && Ey <= 284 && MainJFrame.Man < 10)
+			else if (Move == 0 && Ey <= 284 && AppConstant.Man < 10)
 			{
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -943,22 +939,22 @@ public class ChessRule {
 			}
 			
 			//相、象规则
-			if (Move == 0 && Ey >= 341 && MainJFrame.Man > 9){
+			if (Move == 0 && Ey >= 341 && AppConstant.Man > 9){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
 			
-			else if (Move == 0 && Ey <= 284 && MainJFrame.Man < 10){
+			else if (Move == 0 && Ey <= 284 && AppConstant.Man < 10){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));									
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));									
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(Ex,Ey,55,55);
 			}
@@ -1027,16 +1023,16 @@ public class ChessRule {
 		//没有障碍、并不能吃自己的棋子
 		if (Chess && Move == 0 && playTake.getName().charAt(1) != play.getName().charAt(1)){
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));
 			
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
@@ -1049,23 +1045,23 @@ public class ChessRule {
 		//上、右
 		if (me.getX() - play.getX() >= 29 && me.getX() - play.getX() <= 114 && play.getY() - me.getY() >= 25 && play.getY() - me.getY() <= 90){
 			//士不能超过自己的界限
-			if (MainJFrame.Man < 14 && (play.getX()+57) >= 195 && (play.getX()+57) <= 309 && (play.getY()-57) <= 170){
+			if (AppConstant.Man < 14 && (play.getX()+57) >= 195 && (play.getX()+57) <= 309 && (play.getY()-57) <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY()-57,55,55);
 			}	
 			
 			//仕不能超过自己的界限
-			else if (MainJFrame.Man > 13 && (play.getY()-57) >= 455 && (play.getX()+57)  >= 195 && (play.getX()+57) <= 309){
+			else if (AppConstant.Man > 13 && (play.getY()-57) >= 455 && (play.getX()+57)  >= 195 && (play.getX()+57) <= 309){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY()-57,55,55);
 			}	
@@ -1074,23 +1070,23 @@ public class ChessRule {
 		//上、左
 		else if (play.getX() - me.getX() <= 114 && play.getX() - me.getX() >= 25 && play.getY() - me.getY() >= 20 && play.getY() - me.getY() <= 95){
 			//士不能超过自己的界限
-			if (MainJFrame.Man < 14 &&  (play.getX()-57) >= 195 && (play.getX()-57) <= 309 && (play.getY()-57) <= 170  ){
+			if (AppConstant.Man < 14 &&  (play.getX()-57) >= 195 && (play.getX()-57) <= 309 && (play.getY()-57) <= 170  ){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY()-57,55,55);
 			}	
 			
 			//仕不能超过自己的界限
-			else if (MainJFrame.Man > 13 &&(play.getY()-57) >= 455 && (play.getX()-57)  >= 195 && (play.getX()-57) <= 309){
+			else if (AppConstant.Man > 13 &&(play.getY()-57) >= 455 && (play.getX()-57)  >= 195 && (play.getX()-57) <= 309){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY()-57,55,55);
 			}	
@@ -1099,23 +1095,23 @@ public class ChessRule {
 		//下、左
 		else if (play.getX() - me.getX() <= 114 && play.getX() - me.getX() >= 20 && me.getY() - play.getY() >= 2 && me.getY() - play.getY() <= 87){
 			//士不能超过自己的界限
-			if (MainJFrame.Man < 14 && (play.getX()-57) >= 195 && (play.getX()-57) <= 309 && (play.getY()+57) <= 170 ){
+			if (AppConstant.Man < 14 && (play.getX()-57) >= 195 && (play.getX()-57) <= 309 && (play.getY()+57) <= 170 ){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY()+57,55,55);
 			}	
 			
 			//仕不能超过自己的界限
-			else if (MainJFrame.Man > 13 && (play.getY()+57) >= 455 && (play.getX()-57)  >= 195 && (play.getX()-57) <= 309){
+			else if (AppConstant.Man > 13 && (play.getY()+57) >= 455 && (play.getX()-57)  >= 195 && (play.getX()-57) <= 309){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY()+57,55,55);
 			}
@@ -1126,23 +1122,23 @@ public class ChessRule {
 		//下、右
 		else if (me.getX() - play.getX() >= 27 && me.getX() - play.getX() <= 114 && me.getY() - play.getY() >= 2 && me.getY() - play.getY() <= 87){
 			//士不能超过自己的界限
-			if (MainJFrame.Man < 14 && (play.getX()+57) >= 195 && (play.getX()+57) <= 309 && (play.getY()+57) <= 170){
+			if (AppConstant.Man < 14 && (play.getX()+57) >= 195 && (play.getX()+57) <= 309 && (play.getY()+57) <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY()+57,55,55);
 			}
 			
 			//仕不能超过自己的界限
-			else if (MainJFrame.Man > 13 &&(play.getY()+57) >= 455 && (play.getX()+57)  >= 195 && (play.getX()+57) <= 309){
+			else if (AppConstant.Man > 13 &&(play.getY()+57) >= 455 && (play.getX()+57)  >= 195 && (play.getX()+57) <= 309){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY()+57,55,55);
 			}
@@ -1159,12 +1155,12 @@ public class ChessRule {
 		//上、右
 		if (playTake.getX() - play.getX() >= 20 && playTake.getX() - play.getX() <= 114 && play.getY() - playTake.getY() >= 2 && play.getY() - playTake.getY() <= 87){
 			//被吃的棋子是否和当前士相近
-			if (MainJFrame.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
+			if (AppConstant.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
 				Chap = true;
 			}
 			
 			//被吃的棋子是否和当前仕相近
-			else if (MainJFrame.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
+			else if (AppConstant.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
 				Chap = true;
 			}
 		}//if
@@ -1172,12 +1168,12 @@ public class ChessRule {
 		//上、左
 		else if (play.getX() - playTake.getX() <= 114 && play.getX() - playTake.getX() >= 25 && play.getY() - playTake.getY() >= 2 && play.getY() - playTake.getY() <= 87){
 			//被吃的棋子是否和当前士相近
-			if (MainJFrame.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
+			if (AppConstant.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
 				Chap = true;
 			}
 			
 			//被吃的棋子是否和当前仕相近
-			else if (MainJFrame.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
+			else if (AppConstant.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
 				Chap = true;
 			}
 		}// else if 
@@ -1185,12 +1181,12 @@ public class ChessRule {
 		//下、左
 		else if (play.getX() - playTake.getX() <= 114 && play.getX() - playTake.getX() >= 25 && playTake.getY() - play.getY() >= 2 && playTake.getY() - play.getY() <= 87){
 			//被吃的棋子是否和当前士相近
-			if (MainJFrame.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
+			if (AppConstant.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
 				Chap = true;
 			}
 			
 			//被吃的棋子是否和当前仕相近
-			else if (MainJFrame.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
+			else if (AppConstant.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
 				Chap = true;
 			}
 		}// else if 
@@ -1198,12 +1194,12 @@ public class ChessRule {
 		//下、右
 		else if (playTake.getX() - play.getX() >= 25 && playTake.getX() - play.getX() <= 114 && playTake.getY() - play.getY() >= 2 && playTake.getY() - play.getY() <= 87){
 			//被吃的棋子是否和当前士相近
-			if (MainJFrame.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
+			if (AppConstant.Man < 14 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170 && playTake.isVisible()){
 				Chap = true;
 			}
 			
 			//被吃的棋子是否和当前仕相近
-			else if (MainJFrame.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
+			else if (AppConstant.Man > 13 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() >= 455 && playTake.isVisible()){
 				Chap = true;
 			}
 		}//else if 
@@ -1211,16 +1207,16 @@ public class ChessRule {
 		//可移动、并不能吃自己的棋子
 		if (Chap && playTake.getName().charAt(1) != play.getName().charAt(1)){
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));
 			
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
@@ -1233,23 +1229,23 @@ public class ChessRule {
 		//向上
 		if ((me.getX()-play.getX()) >= 0 && (me.getX()-play.getX()) <= 55 && (play.getY()-me.getY()) >=2 && play.getY()-me.getY() <= 87){
 			//将是否超过自己的界限
-			if (MainJFrame.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
+			if (AppConstant.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX(),play.getY()-57,55,55);	
 			}	
 			
 			//帅是否超过自己的界限
-			else if (MainJFrame.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
+			else if (AppConstant.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX(),play.getY()-57,55,55);
 			}
@@ -1258,23 +1254,23 @@ public class ChessRule {
 		//向左
 		else if (play.getX() - me.getX() >= 2 && play.getX() - me.getX() <= 57 && me.getY() - play.getY() <= 27 && me.getY() - play.getY() >= -27){
 			//将是否超过自己的界限
-			if (MainJFrame.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
+			if (AppConstant.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY(),55,55);
 			}
 			
 			//帅是否超过自己的界限
-			else if (MainJFrame.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
+			else if (AppConstant.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()-57,play.getY(),55,55);
 			}
@@ -1283,22 +1279,22 @@ public class ChessRule {
 		//向右
 		else if (me.getX() - play.getX() >= 57 && me.getX() - play.getX() <= 112 && me.getY() - play.getY() <= 27 && me.getY() - play.getY() >= -27){
 			//将、帅规则
-			if (MainJFrame.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
+			if (AppConstant.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY(),55,55);	
 			}	
 			
-			else if (MainJFrame.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
+			else if (AppConstant.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));	
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));	
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX()+57,play.getY(),55,55);
 			}
@@ -1307,22 +1303,22 @@ public class ChessRule {
 		//向下
 		else if (me.getX() - play.getX() >= 0 && me.getX() - play.getX() <= 55 && me.getY() - play.getY() <= 87 && me.getY() - play.getY() >= 27){
 			//将、帅规则
-			if (MainJFrame.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
+			if (AppConstant.Man == 30 && me.getX() >= 195 && me.getX() <= 359 && me.getY() <= 170){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 				
 				play.setBounds(play.getX(),play.getY()+57,55,55);
 			}
 			
-			else if (MainJFrame.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
+			else if (AppConstant.Man == 31 && me.getY() >= 455 && me.getX() >= 195 && me.getX() <= 359){
 				//当前记录添加到集合(用于悔棋)
-				MainJFrame.Var.add(String.valueOf(play.isVisible()));
-				MainJFrame.Var.add(String.valueOf(play.getX()));
-				MainJFrame.Var.add(String.valueOf(play.getY()));
-				MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+				AppConstant.Var.add(String.valueOf(play.isVisible()));
+				AppConstant.Var.add(String.valueOf(play.getX()));
+				AppConstant.Var.add(String.valueOf(play.getY()));
+				AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 				play.setBounds(play.getX(),play.getY()+57,55,55);
 			}
@@ -1338,12 +1334,12 @@ public class ChessRule {
 		//向上吃
 		if (play.getX() - playTake.getX() >= 0 && play.getX() - playTake.getX() <= 55 && play.getY() - playTake.getY() >= 27 && play.getY() - playTake.getY() <= 87 && playTake.isVisible()){
 			//被吃的棋子是否和当前将相近
-			if (MainJFrame.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
+			if (AppConstant.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
 				will = true;
 			}
 			
 			//被吃的棋子是否和当前帅相近
-			else if (MainJFrame.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
+			else if (AppConstant.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
 				will = true; 
 			}
 		}
@@ -1351,12 +1347,12 @@ public class ChessRule {
 		//向左吃
 		else if (play.getX() - playTake.getX() >= 2 && play.getX() - playTake.getX() <= 57 && playTake.getY() - play.getY() <= 27 && playTake.getY() - play.getY() >= -27 && playTake.isVisible()){
 			//被吃的棋子是否和当前将相近
-			if (MainJFrame.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
+			if (AppConstant.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
 				will = true;
 			}
 			
 			//被吃的棋子是否和当前帅相近
-			else if (MainJFrame.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
+			else if (AppConstant.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
 				will = true; 
 			}
 		}
@@ -1364,12 +1360,12 @@ public class ChessRule {
 		//向右吃
 		else if (playTake.getX() - play.getX() >= 2 && playTake.getX() - play.getX() <= 57 && playTake.getY() - play.getY() <= 27 && playTake.getY() - play.getY() >= -27 && playTake.isVisible()){
 			//被吃的棋子是否和当前将相近
-			if (MainJFrame.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
+			if (AppConstant.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
 				will = true;
 			}
 			
 			//被吃的棋子是否和当前帅相近
-			else if (MainJFrame.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
+			else if (AppConstant.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
 				will = true; 
 			}
 		}
@@ -1377,12 +1373,12 @@ public class ChessRule {
 		//向下
 		else if (playTake.getX() - play.getX() >= 0 && playTake.getX() - play.getX() <= 87 && playTake.getY() - play.getY() <= 27 && playTake.getY() - play.getY() >= 40 && playTake.isVisible()){
 			//被吃的棋子是否和当前将相近
-			if (MainJFrame.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
+			if (AppConstant.Man == 30 && playTake.getX() >= 195 && playTake.getX() <= 309 && playTake.getY() <= 170){
 				will = true;
 			}
 			
 			//被吃的棋子是否和当前帅相近
-			else if (MainJFrame.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
+			else if (AppConstant.Man == 31 && playTake.getY() >= 455 && playTake.getX() >= 195 && playTake.getX() <= 309){
 				will = true; 
 			}
 		}
@@ -1390,16 +1386,16 @@ public class ChessRule {
 		//不能吃自己的棋子、符合当前要求	
 		if (playTake.getName().charAt(1) != play.getName().charAt(1) && will){
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(play.isVisible()));
-			MainJFrame.Var.add(String.valueOf(play.getX()));
-			MainJFrame.Var.add(String.valueOf(play.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.Man));
+			AppConstant.Var.add(String.valueOf(play.isVisible()));
+			AppConstant.Var.add(String.valueOf(play.getX()));
+			AppConstant.Var.add(String.valueOf(play.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.Man));
 			
 			//当前记录添加到集合(用于悔棋)
-			MainJFrame.Var.add(String.valueOf(playTake.isVisible()));
-			MainJFrame.Var.add(String.valueOf(playTake.getX()));
-			MainJFrame.Var.add(String.valueOf(playTake.getY()));
-			MainJFrame.Var.add(String.valueOf(MainJFrame.i));
+			AppConstant.Var.add(String.valueOf(playTake.isVisible()));
+			AppConstant.Var.add(String.valueOf(playTake.getX()));
+			AppConstant.Var.add(String.valueOf(playTake.getY()));
+			AppConstant.Var.add(String.valueOf(AppConstant.i));
 
 			playTake.setVisible(false);
 			play.setBounds(playTake.getX(),playTake.getY(),55,55);
