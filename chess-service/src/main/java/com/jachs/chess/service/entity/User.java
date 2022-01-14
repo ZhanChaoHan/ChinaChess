@@ -1,4 +1,4 @@
-package com.jachs.chess.entity;
+package com.jachs.chess.service.entity;
 
 /***
  * 
