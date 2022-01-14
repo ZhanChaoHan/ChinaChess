@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
@@ -55,4 +56,6 @@ public class AppConstant {
 	public static ChessRule rule;
 /*--------------------StartFrame---------------------**/
 	public static JTextField jtf=new JTextField("名称");
+/*--------------------ChatFrame---------------------**/
+	public static JTextArea sendArea, contentArea;
 }
