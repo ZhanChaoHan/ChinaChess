@@ -28,7 +28,6 @@ import com.jachs.chess.event.mainframe.MainMouseStyleEvent;
  *
  */
 public class MainJFrame extends JFrame {
-		
 		/**
 		** 构造函数
 		** 初始化图形用户界面
@@ -119,7 +118,7 @@ public class MainJFrame extends JFrame {
 			this.setResizable(false);
 			this.setTitle(Title);
 			this.setSize(558,670);
-			this.show();
+			this.setVisible(false);
 		}
 		
 		/**

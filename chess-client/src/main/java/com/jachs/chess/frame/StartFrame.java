@@ -17,6 +17,8 @@ import com.jachs.chess.event.startframe.StartFrameClickEvent;
  *
  */
 public class StartFrame  extends JFrame{
+	private static final long serialVersionUID = 1L;
+
 	public StartFrame(){
 		JLabel jla=new JLabel("输入名称:");
 		

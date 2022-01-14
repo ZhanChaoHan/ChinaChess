@@ -23,6 +23,7 @@ import com.jachs.chess.event.chatframe.SendButtClick;
  *
  */
 public class ChatFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
 		JPanel contentPane;
 	    JButton sendbutt;
 		/**
@@ -74,8 +75,8 @@ public class ChatFrame extends JFrame {
 			this.setIconImage(new ImageIcon(ChatFrame.class.getResource("/image/room/qq.png")).getImage());
 			this.setTitle(Title);
 			this.setSize(558,670);
-			this.setVisible(true);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			this.setVisible(false);
 		}
 		
 }

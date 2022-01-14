@@ -1,12 +1,20 @@
 package com.jachs.chess;
 
+import com.jachs.chess.frame.ChatFrame;
 import com.jachs.chess.frame.MainJFrame;
+import com.jachs.chess.frame.StartFrame;
 
 /***
  * @author zhanchaohan
  */
 public class ChessMain{
 	public static void main(String args[]){
-		new MainJFrame("中国象棋：观棋不语真君子，棋死无悔大丈夫");
+		AppConstant.mainJFrame=new MainJFrame("象棋");
+		AppConstant.startFrame=new StartFrame();
+		AppConstant.chatFrame=new ChatFrame("聊天室");
+		
+		AppConstant.mainJFrame.setVisible(false);
+		AppConstant.startFrame.setVisible(true);
+		AppConstant.chatFrame.setVisible(false);
 	}
 }

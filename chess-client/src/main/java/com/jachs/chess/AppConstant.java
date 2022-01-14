@@ -9,13 +9,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import com.jachs.chess.frame.ChatFrame;
+import com.jachs.chess.frame.MainJFrame;
+import com.jachs.chess.frame.StartFrame;
+
 /***
  * 多线程常量池
  * @author zhanchaohan
  *
  */
 public class AppConstant {
+	public static MainJFrame mainJFrame;
+	public static StartFrame startFrame;
+	public static ChatFrame chatFrame;
+	
 /*--------------------MainJFrame---------------------**/
+	public static String user_name;
 	//保存当前操作
 	public static Vector Var=new Vector();
 	//把第一次的单击棋子给线程响应
