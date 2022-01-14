@@ -19,6 +19,7 @@ import com.jachs.chess.AppConstant;
 import com.jachs.chess.ChessRule;
 import com.jachs.chess.event.mainframe.MainJFrameEvent;
 import com.jachs.chess.event.mainframe.MainJFramePicecClickEvent;
+import com.jachs.chess.event.mainframe.MainMouseStyleEvent;
 
 
 /***
@@ -136,48 +137,48 @@ public class MainJFrame extends JFrame {
 			for (i=0,k=24;i<2;i++,k+=456){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,56,55,55);
-				AppConstant.play[i].setName("车1");
+				AppConstant.play[i].setName("黑车");
 			}
 			//马
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑马.gif"));
 			for (i=4,k=81;i<6;i++,k+=342){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,56,55,55);
-				AppConstant.play[i].setName("马1");
+				AppConstant.play[i].setName("黑马");
 			}
 			//相
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑象.gif"));
 			for (i=8,k=138;i<10;i++,k+=228){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,56,55,55);
-				AppConstant.play[i].setName("象1");
+				AppConstant.play[i].setName("黑象");
 			}
 			//士
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑士.gif"));
 			for (i=12,k=195;i<14;i++,k+=114){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,56,55,55);
-				AppConstant.play[i].setName("士1");
+				AppConstant.play[i].setName("黑士");
 			}
 			//卒
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑卒.gif"));
 			for (i=16,k=24;i<21;i++,k+=114){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,227,55,55);
-				AppConstant.play[i].setName("卒1" + i);
+				AppConstant.play[i].setName("黑卒");
 			}
 			//炮
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑炮.gif"));	
 			for (i=26,k=81;i<28;i++,k+=342){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,170,55,55);
-				AppConstant.play[i].setName("炮1" + i);
+				AppConstant.play[i].setName("黑炮");
 			}
 			//将
 			in = new ImageIcon(MainJFrame.class.getResource("/image/黑将.gif"));
 			AppConstant.play[30] = new JLabel(in);
 			AppConstant.play[30].setBounds(252,56,55,55);
-			AppConstant.play[30].setName("将1");
+			AppConstant.play[30].setName("黑将");
 
 			//红色棋子
 			//车
@@ -185,48 +186,53 @@ public class MainJFrame extends JFrame {
 			for (i=2,k=24;i<4;i++,k+=456){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,569,55,55);
-				AppConstant.play[i].setName("车2");
+				AppConstant.play[i].setName("红车");
 			}
 			//马
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红马.gif"));
 			for (i=6,k=81;i<8;i++,k+=342){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,569,55,55);
-				AppConstant.play[i].setName("马2");
+				AppConstant.play[i].setName("红马");
 			}
 			//相
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红象.gif"));
 			for (i=10,k=138;i<12;i++,k+=228){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,569,55,55);
-				AppConstant.play[i].setName("象2");
+				AppConstant.play[i].setName("红象");
 			}
 			//士
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红士.gif"));
 			for (i=14,k=195;i<16;i++,k+=114){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,569,55,55);
-				AppConstant.play[i].setName("士2");
+				AppConstant.play[i].setName("红士");
 			}
 			//兵
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红卒.gif"));
 			for (i=21,k=24;i<26;i++,k+=114){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,398,55,55);
-				AppConstant.play[i].setName("卒2" + i);
+				AppConstant.play[i].setName("红卒");
 			}
 			//炮
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红炮.gif"));
 			for (i=28,k=81;i<30;i++,k+=342){
 				AppConstant.play[i] = new JLabel(in);
 				AppConstant.play[i].setBounds(k,455,55,55);
-				AppConstant.play[i].setName("炮2" + i);
+				AppConstant.play[i].setName("红炮");
 			}
 			//帅
 			in = new ImageIcon(MainJFrame.class.getResource("/image/红将.gif"));
 			AppConstant.play[31] = new JLabel(in);
 			AppConstant.play[31].setBounds(252,569,55,55);
-			AppConstant.play[31].setName("帅2");
+			AppConstant.play[31].setName("红将");
+			
+//			//添加样式
+			for (int kk = 0; kk <AppConstant.play.length; kk++) {
+				AppConstant.play[kk].addMouseListener(new MainMouseStyleEvent());
+			}
 		}
 		
 }
