@@ -2,12 +2,17 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.jachs</groupId>
+	<parent>
+		 <groupId>com.jachs.chess</groupId>
+		  <artifactId>chess</artifactId>
+		  <version>1.0</version>
+	</parent>
+	
+  <groupId>com.jachs.chess.server</groupId>
   <artifactId>chess-server</artifactId>
-  <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>chess</name>
+  <name>chess-server</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -15,13 +20,16 @@
   </properties>
 
   <dependencies>
+  		<dependency>
+	     <groupId>com.jachs.chess.service</groupId>
+		  <artifactId>chess-service</artifactId>
+		  <version>1.0</version>
+   	 	</dependency>
     	<dependency>
 	      <groupId>junit</groupId>
 	      <artifactId>junit</artifactId>
 	      <version>4.13.2</version>
 	      <scope>test</scope>
-   	 </dependency>
-    
-    
+   	 	</dependency>
   </dependencies>
 </project>

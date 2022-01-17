@@ -2,9 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		 <groupId>com.jachs.chess</groupId>
+		  <artifactId>chess</artifactId>
+		  <version>1.0</version>
+	</parent>
+	
   <groupId>com.jachs.chess.service</groupId>
   <artifactId>chess-service</artifactId>
-  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>chess-service</name>
@@ -15,11 +20,5 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
