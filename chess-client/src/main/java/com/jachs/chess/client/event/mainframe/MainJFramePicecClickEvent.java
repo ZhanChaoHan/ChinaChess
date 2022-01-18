@@ -29,7 +29,7 @@ public class MainJFramePicecClickEvent implements MouseListener{
 		//单击棋盘(移动棋子)
 		if (me.getSource().equals(AppConstant.image)){
 			//该红棋走棋的时候
-			if (AppConstant.chessPlayClick == 2 && AppConstant.play[AppConstant.Man].getName().charAt(1) == '2'){	
+			if (AppConstant.chessPlayClick == 2){
 				Ex = AppConstant.play[AppConstant.Man].getX();
 				Ey = AppConstant.play[AppConstant.Man].getY();
 				//移动卒、兵
@@ -66,7 +66,7 @@ public class MainJFramePicecClickEvent implements MouseListener{
 				}
 			}
 			//该黑棋走棋的时候
-			else if (AppConstant.chessPlayClick == 1 && AppConstant.play[AppConstant.Man].getName().charAt(1) == '1'){
+			if (AppConstant.chessPlayClick == 1){
 				Ex = AppConstant.play[AppConstant.Man].getX();
 				Ey = AppConstant.play[AppConstant.Man].getY();
 
@@ -74,27 +74,22 @@ public class MainJFramePicecClickEvent implements MouseListener{
 				if (AppConstant.Man > 15 && AppConstant.Man < 26){
 					AppConstant.rule.armsRule(AppConstant.Man,AppConstant.play[AppConstant.Man],me);
 				}
-				
 				//移动炮
 				else if (AppConstant.Man > 25 && AppConstant.Man < 30){
 					AppConstant.rule.cannonRule(AppConstant.play[AppConstant.Man],AppConstant.play,me);
 				}
-				
 				//移动车
 				else if (AppConstant.Man >=0 && AppConstant.Man < 4){
 					AppConstant.rule.cannonRule(AppConstant.play[AppConstant.Man],AppConstant.play,me);
 				}
-				
 				//移动马
 				else if (AppConstant.Man > 3 && AppConstant.Man < 8){
 					AppConstant.rule.horseRule(AppConstant.play[AppConstant.Man],AppConstant.play,me);
 				}
-				
 				//移动相、象
 				else if (AppConstant.Man > 7 && AppConstant.Man < 12){
 					AppConstant.rule.elephantRule(AppConstant.Man,AppConstant.play[AppConstant.Man],AppConstant.play,me);
 				}
-				
 				//移动仕、士
 				else if (AppConstant.Man > 11 && AppConstant.Man < 16){
 					AppConstant.rule.chapRule(AppConstant.Man,AppConstant.play[AppConstant.Man],AppConstant.play,me);
