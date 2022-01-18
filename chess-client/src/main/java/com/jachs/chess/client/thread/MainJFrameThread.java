@@ -24,7 +24,7 @@ public class MainJFrameThread implements Runnable {
 					AppConstant.text.setVisible(true);
 				}
 				AppConstant.tmain.sleep(350);
-			}catch (Exception e){}
+			}catch (Exception e){e.printStackTrace();}
 	}
   }
 }

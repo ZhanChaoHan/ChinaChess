@@ -8,11 +8,11 @@ import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.jachs.chess.server.thread.ServerReaderThread;
+import com.jachs.chess.server.thread.ServertWriterThread;
 import com.jachs.chess.service.ServerSocketBase;
 import com.jachs.chess.service.THREADTYPE;
 import com.jachs.chess.service.entity.Server;
-import com.jachs.chess.service.thread.session.ServerReaderThread;
-import com.jachs.chess.service.thread.session.ServertWriterThread;
 
 /***
  * 
@@ -24,7 +24,7 @@ public class IServerSocket extends ServerSocketBase{
 	
 	public IServerSocket(THREADTYPE type) {
 		super();
-		this.type = type;
+		this.type=type;
 	}
 
 	@Override
@@ -41,6 +41,7 @@ public class IServerSocket extends ServerSocketBase{
 		Socket socket=null;
 		try {
 			while((socket=super.serverSocket.accept())!=null) {
+				System.out.println("连接建立");
 				synchronized (this) {
 					Set<Socket> sSet=PoolConstant.clientMap.get(type);
 					if(sSet==null) {
@@ -50,11 +51,15 @@ public class IServerSocket extends ServerSocketBase{
 						sSet.add(socket);
 					}
 					PoolConstant.clientMap.put(type, sSet);
+					
+					ObjectInputStream ois=new ObjectInputStream(socket.getInputStream());
+					ObjectOutputStream oos=new ObjectOutputStream(socket.getOutputStream());
+					
+					PoolConstant.oosList.add(oos);
+					PoolConstant.oisList.add(ois);
+					new Thread(new ServerReaderThread(ois)).start();
+					new Thread(new ServertWriterThread(oos)).start();
 				}
-				PoolConstant.oosList.add(new ObjectOutputStream(socket.getOutputStream()));
-				PoolConstant.oisList.add(new ObjectInputStream(socket.getInputStream()));
-				new Thread(new ServerReaderThread(new ObjectInputStream(socket.getInputStream()),PoolConstant.oosList)).start();
-				new Thread(new ServertWriterThread(new ObjectOutputStream(socket.getOutputStream()))).start();
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

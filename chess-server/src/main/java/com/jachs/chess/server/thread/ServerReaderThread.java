@@ -1,10 +1,10 @@
-package com.jachs.chess.service.thread.session;
+package com.jachs.chess.server.thread;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import javax.swing.JTextArea;
-
+import com.jachs.chess.server.PoolConstant;
 import com.jachs.chess.service.entity.Message;
 
 /***
@@ -12,25 +12,22 @@ import com.jachs.chess.service.entity.Message;
  * @author zhanchaohan
  *
  */
-public class SocketReaderThread implements Runnable{
+public class ServerReaderThread implements Runnable{
 	private ObjectInputStream ois;
-	private JTextArea ja;//聊天内容展示文本框
-	
-	public SocketReaderThread(ObjectInputStream ois, JTextArea ja) {
+
+	public ServerReaderThread(ObjectInputStream ois) {
 		super();
 		this.ois = ois;
-		this.ja = ja;
 	}
-
-
 
 	@Override
 	public void run() {
-		Message mess;
+		Message mess=null;
 		try {
 			while((mess=(Message) ois.readObject())!=null) {
-				ja.append(mess.getMessage());
-				ja.append("\n");//换行
+				for (ObjectOutputStream objectOutputStream : PoolConstant.oosList) {
+					objectOutputStream.writeObject(mess);
+				}
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

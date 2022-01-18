@@ -1,4 +1,4 @@
-package com.jachs.chess.service.thread.session;
+package com.jachs.chess.server.thread;
 
 import java.io.ObjectOutputStream;
 

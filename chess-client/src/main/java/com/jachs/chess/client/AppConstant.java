@@ -1,6 +1,7 @@
 package com.jachs.chess.client;
 
 import java.awt.Container;
+import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -68,5 +69,5 @@ public class AppConstant {
 /*--------------------ChatFrame---------------------**/
 	public static JTextArea sendArea, contentArea;
 /*---------------------Socket-----------------------**/
-	
+	public static ObjectOutputStream sessionOos;
 }

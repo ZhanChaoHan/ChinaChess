@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.jachs.chess.client.AppConstant;
-import com.jachs.chess.service.ISocket;
+import com.jachs.chess.client.ISocket;
 import com.jachs.chess.service.THREADTYPE;
 import com.jachs.chess.service.entity.Server;
 
@@ -35,12 +35,12 @@ public class StartFrameClickEvent implements MouseListener{
 			pro.load(StartFrameClickEvent.class.getResourceAsStream("/client.properties"));
 			
 			server.setIp(pro.getProperty("server.ip"));
-			server.setPort(Integer.parseInt(pro.getProperty("server.ip")));
+			server.setPort(Integer.parseInt(pro.getProperty("server.port")));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		//启动线程
-		ISocket socket=new ISocket(THREADTYPE.Session,AppConstant.contentArea);
+		ISocket socket=new ISocket(AppConstant.contentArea);
 		socket.prepare(server);
 		socket.open();
 		
